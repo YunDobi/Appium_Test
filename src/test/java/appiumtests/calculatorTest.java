@@ -29,57 +29,53 @@ public class calculatorTest {
         }
     }
 
-//    public static void scroll(String direction) {
-//        final HashMap<String, String> scrollObject = new HashMap<String, String>();
-//        scrollObject.put("direction", direction);
-//        driver.executeScript("mobile:scroll", scrollObject);
-//    }
-
     public static void openCalculator(String[] args) throws Exception {
         XCUITestOptions options = new XCUITestOptions()
                 .setUdid("1C2B9B65-3BF1-487B-AAA0-E9962A67A60F")
                 .setPlatformVersion("16.2");
-//                .setApp("/home/myapp.ipa");
 
         IOSDriver driver = new IOSDriver(
         new URL("http://127.0.0.1:4723"), options
         );
 
-        driver.findElement(AppiumBy.accessibilityId("Settings")).click();
-        HashMap<String, String> scrollObject = new HashMap<String, String>();
-        scrollObject.put("direction", "down");
-        scrollObject.put("value", "Developer");
-        System.out.println(scrollObject);
-
-        driver.executeScript("mobile:scroll", scrollObject);
-        driver.findElement(AppiumBy.accessibilityId("DEVELOPER_SETTINGS")).click();
 
 
 
+        driver.findElement(By.xpath("(//XCUIElementTypeIcon[@name=\"Calendar\"])[2]")).click();
+                Thread.sleep(2000);
+        driver.findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"Today\"]")).click();
+        try {
+            driver.findElement(AppiumBy.accessibilityId("1997"));
+            System.out.println("worked");
 
-//        driver.findElement(By.xpath("(//XCUIElementTypeIcon[@name=\"Calendar\"])[2]")).click();
-//        driver.findElement(By.xpath("//XCUIElementTypeButton[@name=\"Today\"]")).click();
-//        try {
-//            driver.findElement(AppiumBy.accessibilityId("1997"));
-//            System.out.println("worked");
-//
-//
-//        } catch (Exception error) {
-//            System.out.println("2021 error");
-//            driver.findElement(AppiumBy.accessibilityId("June")).click();
-//            driver.findElement(AppiumBy.accessibilityId("2023")).click();
-//        }
-//
-//
+
+        } catch (Exception error) {
+            System.out.println("2021 error");
+            driver.findElement(AppiumBy.accessibilityId("June")).click();
+            driver.findElement(AppiumBy.accessibilityId("2023")).click();
+            helper.scrollDown(driver);
+        }
+        System.out.println("Started");
+
+
 //        HashMap<String, String> scrollObject = new HashMap<String, String>();
 //        scrollObject.put("direction", "up");
 //        scrollObject.put("value", "1997");
 //        System.out.println(scrollObject);
 //
 //        driver.executeScript("mobile:scroll", scrollObject);
-////        driver.findElement(AppiumBy.accessibilityId("1997"));
+//        driver.findElement(AppiumBy.accessibilityId("1997"));
+
+
+        //Find Developer from Setting
+//        driver.findElement(AppiumBy.accessibilityId("Settings")).click();
+//        Thread.sleep(5000);
+//        HashMap<String, String> scrollObject = new HashMap<String, String>();
+//        scrollObject.put("direction", "down");
+//        scrollObject.put("value", "Developer");
 //
-//        System.out.println("Started");
+//        driver.executeScript("mobile:scroll", scrollObject);
+//        driver.findElement(AppiumBy.accessibilityId("DEVELOPER_SETTINGS")).click();
 
     }
 }
