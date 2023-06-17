@@ -16,8 +16,7 @@ import java.net.URL;
 import java.util.HashMap;
 
 public class calculatorTest {
-
-    static AppiumDriver driver;
+    public static boolean finding = false;
 
     public static void main(String[] args) {
         try {
@@ -38,12 +37,17 @@ public class calculatorTest {
         new URL("http://127.0.0.1:4723"), options
         );
 
-
+        String year = "1997";
+        String month = "December";
+        String days = "16";
 
 
         driver.findElement(By.xpath("(//XCUIElementTypeIcon[@name=\"Calendar\"])[2]")).click();
                 Thread.sleep(2000);
         driver.findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"Today\"]")).click();
+
+
+
         try {
             driver.findElement(AppiumBy.accessibilityId("1997"));
             System.out.println("worked");
@@ -53,7 +57,17 @@ public class calculatorTest {
             System.out.println("2021 error");
             driver.findElement(AppiumBy.accessibilityId("June")).click();
             driver.findElement(AppiumBy.accessibilityId("2023")).click();
-            helper.scrollDown(driver);
+            while (finding == false) {
+                try {
+                    driver.findElement(AppiumBy.accessibilityId("1997"));
+//                    driver.findElement(By.name("1997"));
+                    finding = true;
+                } catch (Exception err) {
+                    helper.scrollDown(driver);
+                }
+            }
+            driver.findElement(AppiumBy.accessibilityId("December 1997")).click();
+            driver.findElement(AppiumBy.accessibilityId("Tuesday, December 16")).click();
         }
         System.out.println("Started");
 
