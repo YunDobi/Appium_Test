@@ -16,12 +16,12 @@ public class helper {
 
     public static void scrollDown (IOSDriver driver) {
         Dimension dimension = driver.manage().window().getSize();
-        int scrollStart = (int) (dimension.getHeight() * 0.5);
+        int scrollStart = (int) (dimension.getHeight() * 0.2);
         int scrollEnd = (int) (dimension.getHeight() * 0.8);
 
         new TouchAction((PerformsTouchActions) driver)
                 .press(PointOption.point(0,scrollStart))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(0,scrollEnd))
                 .release().perform();
     }
