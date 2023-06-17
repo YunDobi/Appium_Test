@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashMap;
 
 public class calculatorTest {
@@ -28,7 +30,16 @@ public class calculatorTest {
         }
     }
 
+    @Test
     public static void openCalculator(String[] args) throws Exception {
+        LocalDate currentDate = LocalDate.now();
+        Month currentMonth =  currentDate.getMonth();
+        String currentMonthinString = String.valueOf(currentMonth).substring(0,1) + String.valueOf(currentMonth).substring(1).toLowerCase();
+        String year = "1997";
+        String month = "December";
+        String days = "16";
+
+
         XCUITestOptions options = new XCUITestOptions()
                 .setUdid("1C2B9B65-3BF1-487B-AAA0-E9962A67A60F")
                 .setPlatformVersion("16.2");
@@ -37,9 +48,7 @@ public class calculatorTest {
         new URL("http://127.0.0.1:4723"), options
         );
 
-        String year = "1997";
-        String month = "December";
-        String days = "16";
+
 
 
         driver.findElement(By.xpath("(//XCUIElementTypeIcon[@name=\"Calendar\"])[2]")).click();
@@ -49,24 +58,24 @@ public class calculatorTest {
 
 
         try {
-            driver.findElement(AppiumBy.accessibilityId("1997"));
+            driver.findElement(AppiumBy.accessibilityId(year));
             System.out.println("worked");
 
 
         } catch (Exception error) {
             System.out.println("2021 error");
-            driver.findElement(AppiumBy.accessibilityId("June")).click();
+            driver.findElement(AppiumBy.accessibilityId(currentMonthinString)).click();
             driver.findElement(AppiumBy.accessibilityId("2023")).click();
             while (finding == false) {
                 try {
-                    driver.findElement(AppiumBy.accessibilityId("1997"));
+                    driver.findElement(AppiumBy.accessibilityId(year));
 //                    driver.findElement(By.name("1997"));
                     finding = true;
                 } catch (Exception err) {
                     helper.scrollDown(driver);
                 }
             }
-            driver.findElement(AppiumBy.accessibilityId("December 1997")).click();
+            driver.findElement(AppiumBy.accessibilityId(month + year)).click();
             driver.findElement(AppiumBy.accessibilityId("Tuesday, December 16")).click();
         }
         System.out.println("Started");
