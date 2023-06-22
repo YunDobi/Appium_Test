@@ -18,7 +18,7 @@ public class FindingDateTest {
         LocalDate currentDate = LocalDate.now();
         Month currentMonth =  currentDate.getMonth();
         String currentMonthinString = String.valueOf(currentMonth).substring(0,1) + String.valueOf(currentMonth).substring(1).toLowerCase();
-        String year = "1997";
+        String year = "2012";
         String month = "December";
         String days = "16";
         String stringDay = "label contains " +  "'" + days + "'";
@@ -30,8 +30,11 @@ public class FindingDateTest {
         IOSDriver driver = new IOSDriver(
                 new URL("http://127.0.0.1:4723"), options
         );
-        driver.findElement(By.xpath("(//XCUIElementTypeIcon[@name=\"Calendar\"])[2]")).click();
+
+
         Thread.sleep(2000);
+        driver.findElement(By.xpath("(//XCUIElementTypeIcon[@name=\"Calendar\"])[2]")).click();
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"Today\"]")).click();
 
 
